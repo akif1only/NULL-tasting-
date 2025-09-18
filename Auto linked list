@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int info;
+    struct Node *prev, *next;
+};
+
+int main(){
+    int n,data;
+    printf("Enter the number of nodes: ");
+    scanf("%d",&n);
+    
+    if(n<=0){
+        printf("Invalid number of nodes.\n");
+        return 1;
+    }
+    
+    struct Node *head = NULL, *temp = NULL, *newNode;
+    
+    for(int i=0;i<n;i++){
+        printf("Enter data for node %d: ",i+1);
+        scanf("%d",&data);
+        
+        newNode=(struct Node*)malloc(sizeof(struct Node));
+        newNode->info=data;
+        newNode->next=NULL;
+        newNode->prev=temp;
+        
+        if (temp!=NULL)
+            temp->next=newNode;
+        else
+            head=newNode;
+        
+        temp=newNode;
+    }
+    
+    printf("Doubly Linked List: ");
+    temp=head;
+    while(temp) {
+        printf("%d <-> ",temp->info);
+        temp=temp->next;
+    }
+    printf("NULL\n");
+    
+    return 0;
+}
